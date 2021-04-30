@@ -11,19 +11,19 @@ vector<vector<vector<int>>> parent;
 void solve(vector<vector<int>> &shortestpath, vector<vector<int>> &cost, int &H, int &V, int Hnow, int Vnow)
 {
 
-    if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] <= shortestpath[Vnow][Hnow + 1])
+    if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] < shortestpath[Vnow][Hnow + 1])
     {
         shortestpath[Vnow][Hnow + 1] = shortestpath[Vnow][Hnow] + cost[Vnow][Hnow];
         parent[Vnow][Hnow + 1][0] = Vnow;
         parent[Vnow][Hnow + 1][1] = Hnow;
     }
-    if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] <= shortestpath[Vnow + 1][Hnow])
+    if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] < shortestpath[Vnow + 1][Hnow])
     {
         shortestpath[Vnow + 1][Hnow] = shortestpath[Vnow][Hnow] + cost[Vnow][Hnow];
         parent[Vnow + 1][Hnow][0] = Vnow;
         parent[Vnow + 1][Hnow][1] = Hnow;
     }
-    if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] <= shortestpath[Vnow + 1][Hnow + 1])
+    if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] < shortestpath[Vnow + 1][Hnow + 1])
     {
         shortestpath[Vnow + 1][Hnow + 1] = shortestpath[Vnow][Hnow] + cost[Vnow][Hnow];
         parent[Vnow + 1][Hnow + 1][0] = Vnow;
