@@ -10,19 +10,21 @@ vector<vector<vector<int>>> parent;
 
 void solve(vector<vector<int>> &shortestpath, vector<vector<int>> &cost, int &H, int &V, int Hnow, int Vnow)
 {
-
+    //predict the horizontal note next to now
     if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] < shortestpath[Vnow][Hnow + 1])
     {
         shortestpath[Vnow][Hnow + 1] = shortestpath[Vnow][Hnow] + cost[Vnow][Hnow];
         parent[Vnow][Hnow + 1][0] = Vnow;
         parent[Vnow][Hnow + 1][1] = Hnow;
     }
+    //predict the vertical note next to now
     if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] < shortestpath[Vnow + 1][Hnow])
     {
         shortestpath[Vnow + 1][Hnow] = shortestpath[Vnow][Hnow] + cost[Vnow][Hnow];
         parent[Vnow + 1][Hnow][0] = Vnow;
         parent[Vnow + 1][Hnow][1] = Hnow;
     }
+    //predict the diagonal note next to now
     if (shortestpath[Vnow][Hnow] + cost[Vnow][Hnow] < shortestpath[Vnow + 1][Hnow + 1])
     {
         shortestpath[Vnow + 1][Hnow + 1] = shortestpath[Vnow][Hnow] + cost[Vnow][Hnow];
@@ -31,10 +33,10 @@ void solve(vector<vector<int>> &shortestpath, vector<vector<int>> &cost, int &H,
     }
 
     Hnow += 1;
-    if (Hnow == H)
+    if (Hnow == H) //if it reachest the most right, go to next row
     {
         Vnow += 1;
-        if (Vnow == V)
+        if (Vnow == V)//if it reaches last row and most right, end the algo.
             return;
         else
             return solve(shortestpath, cost, H, V, 0, Vnow);
@@ -106,7 +108,7 @@ int main(void)
     //solve recursion
     solve(shortestpath, cost, H, V, 0, 0);
 
-    //print
+    //print cost per vertex
     rep(i, cost.size())
     {
         rep(j, cost[i].size())
@@ -116,6 +118,8 @@ int main(void)
         cout << endl;
     }
     cout << endl;
+
+    //print the cost needed to reach that vertex
     rep(i, V)
     {
         rep(j, H)
@@ -126,6 +130,8 @@ int main(void)
     }
 
     cout << endl;
+
+    //print the parent of the current vertex
     rep(i, V)
     {
         rep(j, H)
