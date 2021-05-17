@@ -1,5 +1,5 @@
 # Shortest-Path-special
-A shortest path algorithm with special input
+A shortest path algorithm with special input, solved with recursion
 
 Overview
 
